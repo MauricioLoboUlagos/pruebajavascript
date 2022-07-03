@@ -1,7 +1,7 @@
 'use-strict'
 
-const mysql = require('mysql');
-const provider = require('./providers/mysql_provider');
+const mysql = require('pg');
+const provider = require('./providers/postgres_provider');
 
 const bookRepo = () => {
     const findAll = async () => {
