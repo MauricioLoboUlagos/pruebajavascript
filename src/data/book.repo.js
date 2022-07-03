@@ -40,9 +40,36 @@ const bookRepo = () => {
         }
     }
 
+    const findById = async ({ id }) => {
+        try {
+            let sql = mysql.format("SELECT * FROM book WHERE id=?", [id]);
+            const result = await provider.query(sql);
+            return result.rows
+
+        } catch (err) {
+            console.error(err)
+            Promise.reject(err)
+        }
+    }
+
+    const deleteById = async ({ id }) => {
+        try {
+            let sql = mysql.format("UPDATE book SET is_available=false WHERE id=?", [id]);
+            const result = await provider.query(sql);
+            return "libro eliminado."
+
+        } catch (err) {
+            console.error(err)
+            Promise.reject(err)
+        }
+
+    }
+
     return {
         findAll: findAll,
-        createBook: create
+        createBook: create,
+        findById: findById,
+        deleteById: deleteById
     }
 }
 

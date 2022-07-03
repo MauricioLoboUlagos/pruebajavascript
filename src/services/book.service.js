@@ -38,16 +38,20 @@ const bookService = () => {
     }
     // find book on database
     const findById = (id) => {
-        let book = {
-            id
-        };
-        return book;
+        try {
+            return await bookRepo.findById(id);
+        } catch (error) {
+            return Promise.reject({ error: true, message: error })
+        }
     }
     
     // delete book on database
     const deleteBook = (id) => {
-        let book = {};
-        return book;
+        try {
+            return await bookRepo.delete(id);
+        } catch (error) {
+            return Promise.reject({ error: true, message: error })
+        }
     }
 
     return {
